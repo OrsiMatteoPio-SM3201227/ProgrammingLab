@@ -1,3 +1,5 @@
+#Scrivere una funzione che sommi tutti gli elementi di una lista (senza usare la funzione built.in)
+
 def somma(lista): #Definizione della funzione somma
   risultato=0
   for numero in lista: #Calcolo del risultato
