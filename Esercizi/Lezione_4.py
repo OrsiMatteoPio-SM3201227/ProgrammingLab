@@ -38,7 +38,7 @@ for line in file:
         value = elements[1]
         # Aggiunta degli elementi alla lista con split di ogni riga su ","
         for elements in file:
-            list_1.append(elements.split(','))
+            list_1.append(elements[0:-1].split(','))
 # Chiusura del file
 file.close()
 
