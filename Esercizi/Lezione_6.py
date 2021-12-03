@@ -37,6 +37,7 @@ class CSVFile():
             return None
         if(start > end):
             raise Exception('Il parametro start è maggiore del parametro end')
+            return None
         # Lettura del file, linea per linea
         for line in file:
             # Istanziamento di elementi con split di ogni riga su ","
