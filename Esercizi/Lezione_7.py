@@ -1,5 +1,4 @@
-# Parte 1 - Modificare l’oggetto CSVFile della lezione precedente in modo che stampi a schermo un messaggio di errore se si cerca di aprire un file non esistente.
-# Parte 2 - Estendere l’oggetto CSVFile chiamandolo NumericalCSVFile e facendo in modo che converta automaticamente a numero tutte le colonne tranne la prima (della data). Poi, aggiungere questi due campi al file “shampoo_sales.csv”: (*Vedere slide*). Quindi, gestire gli errori che verranno generati in modo che le linee vengano saltate senza bloccare il programma ma che venga stampato a schermo l’errore. Infine, eseguire commit del file.
+# Scrivere dei test o degli unit test per gli oggetti CSVFile e NumericalCSVFile.
 
 # ==============================
 #           CLASSI
@@ -11,17 +10,35 @@ class CSVFile():
     def __init__(self, name):
         # Istanziamento dell'attributo "name"
         self.name = name
+        # Controllo del tipo di nome del file
+        if type(name) != str:
+            raise TypeError('Errore di tipo: il nome inserito non è una stringa! Ecco il parametro che lo ha generato: {}'.format(name))
     
-    def get_data(self):
+    def get_data(self, start = None, end = None):
         # Istanziamento di due liste: una lista e una lista di lista
         list = []
         listoflist = []
-        # Apertura e Lettura del file, linea per linea
+        # Apertura del file
         try:
             file = open(self.name, 'r')
         except FileNotFoundError:
             print ('Il file che si sta cercando di aprire non esiste!')
-            return None
+        # Controllo della correttezza di start ed end
+        if type(start) != int:
+            raise TypeError('Errore di tipo: il parametro inserito non è un numero intero!')
+        if type(end) != int:
+            raise TypeError('Errore di tipo: il parametro inserito non è un numero intero!')
+        if(start > len(self.name)):
+            raise ValueError('Il file {} ha {} righe'.format(self.name, len(self.name)))
+        if(end > len(self.name)):
+            raise ValueError('Il file {} ha {} righe'.format(self.name, len(self.name)))
+        if(start < 0):
+            raise ValueError('Errore di valore: non è accettabile un valore negativo!')
+        if(end < 0):
+            raise ValueError('Errore di valore: non è accettabile un valore negativo!')
+        if(start > end):
+            raise ValueError('Il parametro start è maggiore del parametro end')
+        # Lettura del file, linea per linea
         for line in file:
             # Istanziamento di elementi con split di ogni riga su ","
             elements = line.split(',')
@@ -34,16 +51,16 @@ class CSVFile():
         file.close()
         # Aggiunta degli elementi della lista alla lista di lista
         listoflist.extend(list)
-        return listoflist
-
+        return listoflist[start : end]
+        
 # ==============================
 #   Classe per NumericalCSVFile
 # ==============================
 class NumericalCSVFile(CSVFile):
 
-    def get_data(self):
+    def get_data(self, start = None, end = None):
         # Richiamo della funzione genitrice
-        string_data = super().get_data()
+        string_data = super().get_data(start, end)
         # Istanziamento di una lista per salvare i valori
         numerical_data = []
         # Lettura del file, linea per linea
@@ -60,17 +77,17 @@ class NumericalCSVFile(CSVFile):
                         break
                 if len(numerical_row) == len(string_row):
                     numerical_data.append(numerical_row)
-        return numerical_data
+        return numerical_data[start : end]
 
 # ==============================
 #           PROGRAMMA
 # ==============================
 #       Corpo del programma
 # ==============================
-my_file = CSVFile(name = 'shampoo_sales.csv')
+my_file = CSVFile(name = '../shampoo_sales.csv')
 print('Nome del file: {}'.format(my_file.name))
-print('Dati contenuti nel file: "{}"'.format(my_file.get_data()))
+print('Dati contenuti nel file: "{}"'.format(my_file.get_data(5, 8)))
 
-my_numerical_file = NumericalCSVFile(name = 'shampoo_sales.csv')
+my_numerical_file = NumericalCSVFile(name = '../shampoo_sales.csv')
 print('Nome del file numerico: "{}"'.format(my_numerical_file.name))
-print('Dati contenuti nel file: "{}"'.formatmy_numerical_file.get_data())
+print('Dati contenuti nel file numerico: "{}"'.format(my_numerical_file.get_data(5, 8)))

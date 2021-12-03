@@ -9,7 +9,7 @@
 class CSVFile():
     
     def __init__(self, name):
-        # Programmazione dell'attributo "name"
+        # Istanziamento dell'attributo "name"
         self.name = name
         # Controllo del tipo di nome del file
         if type(name) != str:
