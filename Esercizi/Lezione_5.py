@@ -73,4 +73,4 @@ print('Dati contenuti nel file: "{}"'.format(my_file.get_data()))
 
 my_numerical_file = NumericalCSVFile(name = 'shampoo_sales.csv')
 print('Nome del file numerico: "{}"'.format(my_numerical_file.name))
-print('Dati contenuti nel file: "{}"'.formatmy_numerical_file.get_data())
+print('Dati contenuti nel file numerico: "{}"'.format(my_numerical_file.get_data()))

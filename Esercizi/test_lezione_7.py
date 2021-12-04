@@ -1,4 +1,4 @@
-# Scrivere dei test o degli unit test per gli oggetti CSVFile e NumericalCSVFile.
+# Scrivere dei test o degli unit test per gli oggetti CSVFile e NumericalCSVFile (comando per eseguire il test: python -m unittest discover. Attenzione: eseguirlo nella directory Esercizi/). Infine, eseguire commit del file.
 
 # ==============================
 #           CLASSI

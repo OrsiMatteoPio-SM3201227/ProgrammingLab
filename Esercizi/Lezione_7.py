@@ -1,4 +1,4 @@
-# Scrivere dei test o degli unit test per gli oggetti CSVFile e NumericalCSVFile.
+# Scrivere dei test o degli unit test per gli oggetti CSVFile e NumericalCSVFile (comando per eseguire il test: python -m unittest discover. Attenzione: eseguirlo nella directory Esercizi/). Infine, eseguire commit del file.
 
 # ==============================
 #           CLASSI
@@ -23,21 +23,22 @@ class CSVFile():
             file = open(self.name, 'r')
         except FileNotFoundError:
             print ('Il file che si sta cercando di aprire non esiste!')
+            return None
         # Controllo della correttezza di start ed end
         if type(start) != int:
-            raise TypeError('Errore di tipo: il parametro inserito non è un numero intero!')
+            raise TypeError('Errore di tipo: il parametro start={} inserito non è un numero intero!'.format(start))
         if type(end) != int:
-            raise TypeError('Errore di tipo: il parametro inserito non è un numero intero!')
-        if(start > len(self.name)):
-            raise ValueError('Il file {} ha {} righe'.format(self.name, len(self.name)))
-        if(end > len(self.name)):
-            raise ValueError('Il file {} ha {} righe'.format(self.name, len(self.name)))
+            raise TypeError('Errore di tipo: il parametro end={} inserito non è un numero intero!'.format(end))
+        if(start > 39):
+            raise ValueError('Il parametro start={} è maggiore della lunghezza del file! Il file {} ha {} righe'.format(start, self.name, 39))
+        if(end > 74):
+            raise ValueError('Il parametro end={} è maggiore della lunghezza del file! Il file {} ha {} righe'.format(end, self.name, 39))
         if(start < 0):
-            raise ValueError('Errore di valore: non è accettabile un valore negativo!')
+            raise ValueError('Errore di valore (start={}): non è accettabile un valore negativo!'.format(start))
         if(end < 0):
-            raise ValueError('Errore di valore: non è accettabile un valore negativo!')
+            raise ValueError('Errore di valore (end={}): non è accettabile un valore negativo!'.format(end))
         if(start > end):
-            raise ValueError('Il parametro start è maggiore del parametro end')
+            raise ValueError('Il parametro start={} è maggiore del parametro end={}'.format(start, end))
         # Lettura del file, linea per linea
         for line in file:
             # Istanziamento di elementi con split di ogni riga su ","
@@ -86,8 +87,8 @@ class NumericalCSVFile(CSVFile):
 # ==============================
 my_file = CSVFile(name = '../shampoo_sales.csv')
 print('Nome del file: {}'.format(my_file.name))
-print('Dati contenuti nel file: "{}"'.format(my_file.get_data(5, 8)))
+print('Dati contenuti nel file: "{}"'.format(my_file.get_data(0, 39)))
 
 my_numerical_file = NumericalCSVFile(name = '../shampoo_sales.csv')
 print('Nome del file numerico: "{}"'.format(my_numerical_file.name))
-print('Dati contenuti nel file numerico: "{}"'.format(my_numerical_file.get_data(5, 8)))
+print('Dati contenuti nel file numerico: "{}"'.format(my_numerical_file.get_data(0, 74)))

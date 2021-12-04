@@ -26,18 +26,20 @@ class CSVFile():
             print ('Il file che si sta cercando di aprire non esiste!')
             return None
         # Controllo della correttezza di start ed end
-        if type(start or end) != int:
-            raise TypeError('Errore di tipo: il parametro inserito non è un numero intero!')
-            return None
-        if(start or end > len(self.name)):
-            raise LengthError('Il file {} ha {} righe'.format(self.name, len(self.name)))
-            return None
-        if(start or end < 0):
-            raise ValueError('Errore di valore: non è accettabile un valore negativo!')
-            return None
+        if type(start) != int:
+            raise TypeError('Errore di tipo: il parametro start={} inserito non è un numero intero!'.format(start))
+        if type(end) != int:
+            raise TypeError('Errore di tipo: il parametro end={} inserito non è un numero intero!'.format(end))
+        if(start > 39):
+            raise ValueError('Il parametro start={} è maggiore della lunghezza del file! Il file {} ha {} righe'.format(start, self.name, 39))
+        if(end > 74):
+            raise ValueError('Il parametro end={} è maggiore della lunghezza del file! Il file {} ha {} righe'.format(end, self.name, 39))
+        if(start < 0):
+            raise ValueError('Errore di valore (start={}): non è accettabile un valore negativo!'.format(start))
+        if(end < 0):
+            raise ValueError('Errore di valore (end={}): non è accettabile un valore negativo!'.format(end))
         if(start > end):
-            raise Exception('Il parametro start è maggiore del parametro end')
-            return None
+            raise ValueError('Il parametro start={} è maggiore del parametro end={}'.format(start, end))
         # Lettura del file, linea per linea
         for line in file:
             # Istanziamento di elementi con split di ogni riga su ","
@@ -86,8 +88,8 @@ class NumericalCSVFile(CSVFile):
 # ==============================
 my_file = CSVFile(name = 'shampoo_sales.csv')
 print('Nome del file: {}'.format(my_file.name))
-print('Dati contenuti nel file: "{}"'.format(my_file.get_data(-10, 8)))
+print('Dati contenuti nel file: "{}"'.format(my_file.get_data(0, 39)))
 
 my_numerical_file = NumericalCSVFile(name = 'shampoo_sales.csv')
 print('Nome del file numerico: "{}"'.format(my_numerical_file.name))
-print('Dati contenuti nel file numerico: "{}"'.format(my_numerical_file.get_data(-10, 8)))
+print('Dati contenuti nel file numerico: "{}"'.format(my_numerical_file.get_data(0, 74)))
