@@ -1,14 +1,23 @@
 # Si scriva una funzione che sommi tutti gli elementi di una lista (senza usare la funzione built.in). Poi, eseguire il commit del file.
 
-# --- FUNZIONI ---
-#
-# Funzione "Somma"
-def somma(lista):
-    risultato = 0
-    for numero in lista:
-        risultato = risultato + numero
-    return print("Somma: {}".format(risultato))
+# ==============================
+#           METODI
+# ==============================
+#             Sum
+# ==============================
+def sum(list):
+    sum = 0
+    for number in list:
+        sum = sum + number
+    print("La somma è: {}".format(sum))
+    return sum
 
-# --- PROGRAMMA PRINCIPALE ---
-lista = [1, 2, 3, 4, 5]
-somma(lista)
+# ==============================
+#           PROGRAMMA
+# ==============================
+#       Corpo del programma
+# ==============================
+# Istanziamento di una lista
+list = [1, 2, 3, 4, 5]
+# RIchiamo del metodo "sum"
+sum(list)

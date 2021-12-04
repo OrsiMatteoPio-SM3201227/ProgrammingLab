@@ -42,7 +42,7 @@ class CSVFile():
 class NumericalCSVFile(CSVFile):
 
     def get_data(self):
-        # Richiamo della funzione genitrice
+        # Richiamo del metodo genitore
         string_data = super().get_data()
         # Istanziamento di una lista per salvare i valori
         numerical_data = []
