@@ -19,5 +19,5 @@ def sum(list):
 # ==============================
 # Istanziamento di una lista
 list = [1, 2, 3, 4, 5]
-# RIchiamo del metodo "sum"
+# Richiamo del metodo "sum"
 sum(list)
