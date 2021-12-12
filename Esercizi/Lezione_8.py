@@ -21,15 +21,19 @@ class Model():
 class IncrementModel(Model):
 
     def predict(self, data):
-        # Istanziamento della variabile predizione e della variabile di differenza
+        # Istanziamento della variabile predizione e della variabile di incremento
         prediction = 0
         increment = 0
-        for i in range(len(data)-1):
+        # Aggiornamento dell'incremento mediante un ciclo, passando per il terzultimo e il penultimo valore della lista
+        for i in range(-3, -1):
             if(data[i] > data[i+1]):
                 increment = increment + (data[i] - data[i+1])
             else:
                 increment = increment + (data[i+1] - data[i])
-        prediction = increment/(len(data)-1) + data[-1]
+        # Divisione dell'incremento per 2
+        increment = increment/2
+        # Aggiornamento della predizione mediante la somma dell'ultimo elemento della lista e l'incremento
+        prediction = data[-1] + increment
         return prediction
 
 # ==============================
@@ -39,6 +43,6 @@ class IncrementModel(Model):
 # ==============================
 # Istanziamento di una lista
 list = [50, 52, 60]
-# Utilizzo il modello predittivo
+# Utilizzo del modello predittivo IncrementModel
 my_model = IncrementModel()
 print('La predizione del modello è: {}'.format(my_model.predict(list)))
