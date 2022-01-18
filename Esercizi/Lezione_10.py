@@ -1,4 +1,4 @@
-# Estendere il modello della lezione precedente IncrementModel come FitIncrementModel, andando ad implementare il metodo fit(). Il fit deve, come appena descritto, calcolare l’incremento medio su tutto il dataset e salvarlo da qualche parte (es: self.global_avg_increment). Poi, sovrascrivere il metodo predict() in modo che usi l’incremento medio su tutto il dataset come descritto nelle slides precedenti. Infine, eseguire il commit del file.
+# Valutare i due modelli delle lezioni 8 e 9, ovvero quello senza fit (IncrementModel) e quelo con fit (IncrementModel) sui dati delle vendite degli shampoo. Per valutarli, occorre: 1. dividere il dataset delle vendite degli shampoo in 24 mesi di dati di fit (che non serviranno per il modello senza fit) e in 12 mesi di dati (gli ultimi) da usare per la valutazione; 2. applicare i modelli sui dati di valutazione confrontando le predizioni con i valori veri. Infine, eseguire il commit del file.
 
 # ==============================
 #           METODI
@@ -74,16 +74,17 @@ class FitIncrementModel(IncrementModel):
 # ==============================
 #       Corpo del programma
 # ==============================
-# Istanziamento di una lista
-data = [8, 19, 31, 41, 50, 52, 60]
-fit_data = [8, 19, 31, 41]
-predict_data = [50, 52, 60]
+# Istanziamento di una lista di tutti i mesi del file
+dataset = [266.0, 145.9, 183.1, 119.3, 180.3, 168.5, 231.8, 224.5, 192.8, 122.9, 336.5, 185.9, 194.3, 149.5, 210.1, 273.3, 191.4, 287.0, 226.0, 303.6, 289.9, 421.6, 264.5, 342.3, 339.7, 440.4, 315.9, 439.3, 401.3, 437.4, 575.5, 407.6, 682.0, 475.3, 581.3, 646.9]
+
+fit_dataset = len(dataset) - 12
+evaluation_dataset = len(dataset) 
 
 # Utilizzo del modello predittivo IncrementModel
 my_model = IncrementModel()
-print('La predizione del modello IncrementModel è: {}'.format(my_model.predict(predict_data)))
+print('La predizione del modello IncrementModel è: {}'.format(my_model.predict(dataset_36mesi)))
 
 # Utilizzo del modello predittivo FitIncrementModel
 my_fit_model = FitIncrementModel()
-print('Incremento medio: {}'.format(my_fit_model.fit(fit_data)))
-print('La predizione del modello FitIncrementModel è: {}'.format(my_fit_model.predict(predict_data)))
+print('Incremento medio: {}'.format(my_fit_model.fit(dataset_36mesi)))
+print('La predizione del modello FitIncrementModel è: {}'.format(my_fit_model.predict(dataset_36mesi)))
