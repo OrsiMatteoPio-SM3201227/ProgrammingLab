@@ -56,7 +56,7 @@ class NumericalCSVFile(CSVFile):
                     try:
                         numerical_data.append(float(element))
                     except Exception as e:
-                        print('Errore in conversione del valore "{}" a numerico: "{}"'.format(element, e))
+                        print('Errore in conversione del valore "{}" a numerico: "{}""'.format(element, e))
                         break
                 if len(numerical_row) == len(string_row):
                     numerical_data.append(numerical_row)
